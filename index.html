@@ -8,267 +8,311 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     >
 
-    <title>Anime Run - Japanese Railway</title>
+    <title>Anime Run - Tokyo Railway</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         GAME WRAPPER
-    ========================== -->
-    <div class="game-wrapper">
+<div class="game-wrapper">
 
-        <!-- =========================
-             START SCREEN
-        ========================== -->
-        <section id="startScreen" class="screen">
+    <!-- ================= START SCREEN ================= -->
 
-            <div class="title-box">
+    <section id="startScreen" class="screen">
 
-                <div class="small-title">
-                    🌸 JAPANESE RAILWAY ADVENTURE 🌸
-                </div>
+        <div class="title-box">
 
-                <h1>ANIME RUN</h1>
-
-                <p class="subtitle">
-                    Endless Runner
-                </p>
-
-                <div class="best-start">
-                    Best Score:
-                    <span id="startBestScore">0</span>
-                </div>
-
+            <div class="small-title">
+                🌸 TOKYO RAILWAY ADVENTURE 🌸
             </div>
 
-            <h2>Select Your Character</h2>
+            <h1>ANIME RUN</h1>
 
-            <div class="characters">
+            <p class="subtitle">
+                RAILWAY ENDLESS RUNNER
+            </p>
 
-                <button
-                    class="character-card selected"
-                    data-character="sakura"
-                >
-                    <div class="character-preview sakura-preview">
-                        <div class="preview-hair"></div>
-                        <div class="preview-face"></div>
-                        <div class="preview-body"></div>
-                    </div>
-
-                    <strong>Sakura</strong>
-                    <span>🌸 Speed Girl</span>
-                </button>
-
-
-                <button
-                    class="character-card"
-                    data-character="akira"
-                >
-                    <div class="character-preview akira-preview">
-                        <div class="preview-hair"></div>
-                        <div class="preview-face"></div>
-                        <div class="preview-body"></div>
-                    </div>
-
-                    <strong>Akira</strong>
-                    <span>⚡ Ninja Boy</span>
-                </button>
-
-
-                <button
-                    class="character-card"
-                    data-character="yuki"
-                >
-                    <div class="character-preview yuki-preview">
-                        <div class="preview-hair"></div>
-                        <div class="preview-face"></div>
-                        <div class="preview-body"></div>
-                    </div>
-
-                    <strong>Yuki</strong>
-                    <span>❄️ Ice Runner</span>
-                </button>
-
-
-                <button
-                    class="character-card"
-                    data-character="ren"
-                >
-                    <div class="character-preview ren-preview">
-                        <div class="preview-hair"></div>
-                        <div class="preview-face"></div>
-                        <div class="preview-body"></div>
-                    </div>
-
-                    <strong>Ren</strong>
-                    <span>🔥 Fire Runner</span>
-                </button>
-
+            <div class="best-start">
+                🏆 Best Score:
+                <span id="startBestScore">0</span>
             </div>
 
+        </div>
 
-            <button id="startButton" class="main-button">
-                ▶ START RUNNING
+
+        <h2>Select Your Runner</h2>
+
+
+        <div class="characters">
+
+            <button
+                class="character-card selected"
+                data-character="sakura"
+            >
+
+                <div class="character-preview sakura-preview">
+                    <div class="preview-hair"></div>
+                    <div class="preview-face"></div>
+                    <div class="preview-body"></div>
+                </div>
+
+                <strong>Sakura</strong>
+                <span>🌸 Speed Girl</span>
+
             </button>
 
-            <div class="controls-info">
 
-                <span>⬅️ A / ←</span>
-                <span>➡️ D / →</span>
-                <span>⬆️ SPACE / ↑</span>
-                <span>⏸️ ESC</span>
+            <button
+                class="character-card"
+                data-character="akira"
+            >
+
+                <div class="character-preview akira-preview">
+                    <div class="preview-hair"></div>
+                    <div class="preview-face"></div>
+                    <div class="preview-body"></div>
+                </div>
+
+                <strong>Akira</strong>
+                <span>⚡ Ninja Runner</span>
+
+            </button>
+
+
+            <button
+                class="character-card"
+                data-character="yuki"
+            >
+
+                <div class="character-preview yuki-preview">
+                    <div class="preview-hair"></div>
+                    <div class="preview-face"></div>
+                    <div class="preview-body"></div>
+                </div>
+
+                <strong>Yuki</strong>
+                <span>❄️ Ice Runner</span>
+
+            </button>
+
+
+            <button
+                class="character-card"
+                data-character="ren"
+            >
+
+                <div class="character-preview ren-preview">
+                    <div class="preview-hair"></div>
+                    <div class="preview-face"></div>
+                    <div class="preview-body"></div>
+                </div>
+
+                <strong>Ren</strong>
+                <span>🔥 Fire Runner</span>
+
+            </button>
+
+        </div>
+
+
+        <button id="startButton" class="main-button">
+            ▶ START RUNNING
+        </button>
+
+
+        <div class="controls-info">
+
+            <span>⬅ A / ←</span>
+            <span>➡ D / →</span>
+            <span>⬆ SPACE / ↑</span>
+            <span>⏸ ESC</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GAME ================= -->
+
+    <section id="gameScreen" class="game-screen hidden">
+
+        <canvas id="gameCanvas"></canvas>
+
+
+        <!-- HUD -->
+
+        <div class="hud">
+
+            <div class="hud-left">
+
+                <div class="hud-item">
+                    🏆
+                    <span id="score">0</span>
+                </div>
+
+                <div class="hud-item coin-hud">
+                    🪙
+                    <span id="coins">0</span>
+                </div>
 
             </div>
 
-        </section>
 
+            <div class="hud-center">
 
-        <!-- =========================
-             GAME SCREEN
-        ========================== -->
-        <section id="gameScreen" class="game-screen hidden">
-
-            <canvas id="gameCanvas"></canvas>
-
-
-            <!-- HUD -->
-            <div class="hud">
-
-                <div class="hud-left">
-
-                    <div class="hud-item">
-                        🏆
-                        <span id="score">0</span>
-                    </div>
-
-                    <div class="hud-item">
-                        🪙
-                        <span id="coins">0</span>
-                    </div>
-
-                </div>
-
-
-                <div class="hud-center">
-                    <div class="location-name">
-                        🚆 TOKYO RAILWAY
-                    </div>
-                </div>
-
-
-                <div class="hud-right">
-
-                    <div class="hud-item">
-                        ⚡
-                        <span id="speed">1.0</span>
-                    </div>
-
-                    <button id="pauseButton" class="pause-button">
-                        ⏸
-                    </button>
-
+                <div class="location-name">
+                    🚆 TOKYO RAILWAY
                 </div>
 
             </div>
 
 
-            <!-- Mobile Controls -->
-            <div class="mobile-controls">
+            <div class="hud-right">
 
-                <button id="leftButton">
-                    ◀
-                </button>
-
-                <button id="jumpButton">
-                    ▲
-                </button>
-
-                <button id="rightButton">
-                    ▶
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             PAUSE SCREEN
-        ========================== -->
-        <section id="pauseScreen" class="overlay hidden">
-
-            <div class="overlay-box">
-
-                <h1>⏸ PAUSED</h1>
-
-                <p>Your run is waiting...</p>
-
-                <button id="resumeButton" class="main-button">
-                    ▶ RESUME
-                </button>
-
-                <button id="pauseRestartButton" class="secondary-button">
-                    🔄 RESTART
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             GAME OVER
-        ========================== -->
-        <section id="gameOverScreen" class="overlay hidden">
-
-            <div class="overlay-box">
-
-                <div class="game-over-icon">
-                    💥
+                <div class="hud-item">
+                    ⚡
+                    <span id="speed">1.0</span>
                 </div>
 
-                <h1>GAME OVER</h1>
-
-                <p>Oh no! Your railway run ended.</p>
-
-                <div class="results">
-
-                    <div>
-                        <span>Score</span>
-                        <strong id="finalScore">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Coins</span>
-                        <strong id="finalCoins">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Best</span>
-                        <strong id="finalBest">0</strong>
-                    </div>
-
-                </div>
-
-                <button id="restartButton" class="main-button">
-                    🔄 RUN AGAIN
-                </button>
-
-                <button id="menuButton" class="secondary-button">
-                    🏠 MAIN MENU
+                <button
+                    id="pauseButton"
+                    class="pause-button"
+                >
+                    ⏸
                 </button>
 
             </div>
 
-        </section>
-
-    </div>
+        </div>
 
 
-    <script src="game.js"></script>
+        <div
+            id="powerMessage"
+            class="power-message hidden"
+        >
+            ⚡ POWER UP!
+        </div>
+
+
+        <!-- MOBILE CONTROLS -->
+
+        <div class="mobile-controls">
+
+            <button id="leftButton">
+                ◀
+            </button>
+
+            <button id="jumpButton">
+                ▲
+            </button>
+
+            <button id="rightButton">
+                ▶
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PAUSE ================= -->
+
+    <section
+        id="pauseScreen"
+        class="overlay hidden"
+    >
+
+        <div class="overlay-box">
+
+            <h1>⏸ PAUSED</h1>
+
+            <p>
+                Your railway run is waiting...
+            </p>
+
+            <button
+                id="resumeButton"
+                class="main-button"
+            >
+                ▶ RESUME
+            </button>
+
+            <button
+                id="pauseRestartButton"
+                class="secondary-button"
+            >
+                🔄 RESTART
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GAME OVER ================= -->
+
+    <section
+        id="gameOverScreen"
+        class="overlay hidden"
+    >
+
+        <div class="overlay-box">
+
+            <div class="game-over-icon">
+                💥
+            </div>
+
+            <h1>GAME OVER</h1>
+
+            <p>
+                Your railway adventure ended!
+            </p>
+
+
+            <div class="results">
+
+                <div>
+                    <span>Score</span>
+                    <strong id="finalScore">0</strong>
+                </div>
+
+                <div>
+                    <span>Coins</span>
+                    <strong id="finalCoins">0</strong>
+                </div>
+
+                <div>
+                    <span>Best</span>
+                    <strong id="finalBest">0</strong>
+                </div>
+
+            </div>
+
+
+            <button
+                id="restartButton"
+                class="main-button"
+            >
+                🔄 RUN AGAIN
+            </button>
+
+
+            <button
+                id="menuButton"
+                class="secondary-button"
+            >
+                🏠 MAIN MENU
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script src="game.js"></script>
 
 </body>
 </html>
