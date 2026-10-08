@@ -1,0 +1,811 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family:
+        "Trebuchet MS",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            180deg,
+            #17152e,
+            #2e2855
+        );
+
+    color: white;
+    touch-action: none;
+}
+
+
+/* =========================================
+   GAME WRAPPER
+========================================= */
+
+.game-wrapper {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   SCREENS
+========================================= */
+
+.screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow-y: auto;
+
+    padding: 35px 20px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255, 192, 220, 0.35),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #25204b,
+            #111329
+        );
+
+    z-index: 20;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.title-box {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.small-title {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #ffd6e8;
+    margin-bottom: 8px;
+}
+
+.title-box h1 {
+    font-size: clamp(48px, 9vw, 100px);
+
+    line-height: 0.9;
+
+    letter-spacing: 8px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 5px 0 #f25b9c,
+        0 10px 25px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+    margin-top: 12px;
+
+    font-size: 20px;
+
+    color: #ffe6f1;
+
+    letter-spacing: 5px;
+}
+
+.best-start {
+    margin-top: 12px;
+
+    font-size: 15px;
+
+    color: #ffd76a;
+}
+
+
+/* =========================================
+   CHARACTER TITLE
+========================================= */
+
+.screen h2 {
+    margin-bottom: 15px;
+
+    font-size: 20px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   CHARACTER CARDS
+========================================= */
+
+.characters {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(130px, 170px));
+
+    gap: 15px;
+
+    max-width: 800px;
+
+    width: 100%;
+
+    justify-content: center;
+}
+
+.character-card {
+    position: relative;
+
+    min-height: 220px;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    border-radius: 20px;
+
+    padding: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.14),
+            rgba(255,255,255,0.04)
+        );
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.character-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #ff9ac4;
+}
+
+.character-card.selected {
+    transform: translateY(-8px);
+
+    border-color: #ff79b0;
+
+    box-shadow:
+        0 0 0 3px rgba(255,121,176,0.2),
+        0 15px 40px rgba(255,72,150,0.25);
+}
+
+.character-card strong {
+    display: block;
+
+    font-size: 18px;
+
+    margin-top: 8px;
+}
+
+.character-card span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: #e8ddeb;
+}
+
+
+/* =========================================
+   CHARACTER PREVIEW
+========================================= */
+
+.character-preview {
+    position: relative;
+
+    height: 145px;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8bd7ff,
+            #ffd5df
+        );
+}
+
+.preview-hair {
+    position: absolute;
+
+    width: 62px;
+    height: 72px;
+
+    left: 50%;
+    top: 25px;
+
+    transform: translateX(-50%);
+
+    border-radius: 48% 48% 45% 45%;
+
+    background: #5a2b55;
+
+    z-index: 2;
+}
+
+.preview-face {
+    position: absolute;
+
+    width: 45px;
+    height: 55px;
+
+    left: 50%;
+    top: 40px;
+
+    transform: translateX(-50%);
+
+    border-radius: 45% 45% 48% 48%;
+
+    background: #ffd4b8;
+
+    z-index: 3;
+}
+
+.preview-face::before,
+.preview-face::after {
+    content: "";
+
+    position: absolute;
+
+    top: 23px;
+
+    width: 6px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #302442;
+}
+
+.preview-face::before {
+    left: 10px;
+}
+
+.preview-face::after {
+    right: 10px;
+}
+
+.preview-body {
+    position: absolute;
+
+    width: 65px;
+    height: 75px;
+
+    left: 50%;
+    top: 88px;
+
+    transform: translateX(-50%);
+
+    border-radius: 25px 25px 5px 5px;
+
+    background: #ff659d;
+
+    z-index: 1;
+}
+
+
+/* Character variations */
+
+.akira-preview .preview-hair {
+    background: #191b2e;
+
+    height: 78px;
+
+    clip-path:
+        polygon(
+            0 20%,
+            15% 0,
+            32% 18%,
+            48% 0,
+            63% 17%,
+            82% 0,
+            100% 25%,
+            92% 100%,
+            5% 100%
+        );
+}
+
+.akira-preview .preview-body {
+    background: #252b48;
+}
+
+.yuki-preview .preview-hair {
+    background: #e8f5ff;
+
+    width: 68px;
+}
+
+.yuki-preview .preview-body {
+    background: #72a9dd;
+}
+
+.ren-preview .preview-hair {
+    background: #b52b35;
+
+    clip-path:
+        polygon(
+            0 15%,
+            25% 0,
+            50% 15%,
+            75% 0,
+            100% 20%,
+            90% 100%,
+            5% 100%
+        );
+}
+
+.ren-preview .preview-body {
+    background: #44213e;
+}
+
+
+/* =========================================
+   MAIN BUTTON
+========================================= */
+
+.main-button {
+    border: none;
+
+    margin-top: 25px;
+
+    padding: 15px 38px;
+
+    border-radius: 999px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: white;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4f9a,
+            #9c4dff
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255,79,154,0.3);
+
+    transition: transform 0.2s;
+}
+
+.main-button:hover {
+    transform: scale(1.05);
+}
+
+.secondary-button {
+    border: 1px solid rgba(255,255,255,0.25);
+
+    margin-top: 12px;
+
+    padding: 12px 30px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   CONTROLS INFO
+========================================= */
+
+.controls-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    font-size: 12px;
+
+    color: #d9d4e5;
+}
+
+.controls-info span {
+    padding: 7px 12px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.06);
+}
+
+
+/* =========================================
+   GAME SCREEN
+========================================= */
+
+.game-screen {
+    position: absolute;
+
+    inset: 0;
+
+    background: #87ceeb;
+}
+
+
+/* =========================================
+   CANVAS
+========================================= */
+
+#gameCanvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =========================================
+   HUD
+========================================= */
+
+.hud {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+
+    padding: 16px 20px;
+
+    pointer-events: none;
+}
+
+.hud-left,
+.hud-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.hud-right {
+    justify-content: flex-end;
+}
+
+.hud-item {
+    padding: 9px 13px;
+
+    border-radius: 14px;
+
+    background: rgba(25,20,45,0.72);
+
+    backdrop-filter: blur(8px);
+
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.2);
+}
+
+.location-name {
+    padding: 8px 15px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.75);
+
+    color: #3b2b4c;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.pause-button {
+    pointer-events: auto;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(25,20,45,0.75);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   MOBILE CONTROLS
+========================================= */
+
+.mobile-controls {
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 20px;
+
+    z-index: 10;
+}
+
+.mobile-controls button {
+    width: 62px;
+    height: 62px;
+
+    border: 2px solid rgba(255,255,255,0.5);
+
+    border-radius: 50%;
+
+    background: rgba(30,25,55,0.65);
+
+    color: white;
+
+    font-size: 24px;
+
+    backdrop-filter: blur(8px);
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.mobile-controls button:active {
+    transform: scale(0.9);
+
+    background: rgba(255,95,160,0.7);
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(13,11,28,0.58);
+
+    backdrop-filter: blur(8px);
+}
+
+.overlay-box {
+    width: min(430px, 95vw);
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(54,40,80,0.95),
+            rgba(24,21,50,0.97)
+        );
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.5);
+}
+
+.overlay-box h1 {
+    font-size: 38px;
+
+    margin-bottom: 10px;
+}
+
+.overlay-box p {
+    color: #d9d1e4;
+}
+
+
+/* =========================================
+   RESULTS
+========================================= */
+
+.results {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+}
+
+.results div {
+    padding: 15px 8px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.06);
+}
+
+.results span {
+    display: block;
+
+    font-size: 11px;
+
+    color: #aaa2b8;
+}
+
+.results strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .screen {
+        padding-top: 25px;
+    }
+
+    .characters {
+        grid-template-columns:
+            repeat(2, minmax(130px, 160px));
+    }
+
+    .character-card {
+        min-height: 190px;
+    }
+
+    .character-preview {
+        height: 115px;
+    }
+
+    .preview-body {
+        top: 75px;
+    }
+
+    .preview-face {
+        top: 30px;
+    }
+
+    .preview-hair {
+        top: 18px;
+    }
+
+    .location-name {
+        display: none;
+    }
+
+    .hud {
+        padding: 10px;
+    }
+
+    .hud-item {
+        padding: 7px 9px;
+        font-size: 13px;
+    }
+
+    .mobile-controls {
+        bottom: 18px;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .characters {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .character-card {
+        min-height: 175px;
+    }
+
+    .character-preview {
+        height: 95px;
+    }
+
+    .character-card strong {
+        font-size: 15px;
+    }
+
+    .main-button {
+        padding: 13px 25px;
+    }
+
+    .mobile-controls button {
+        width: 55px;
+        height: 55px;
+    }
+}
